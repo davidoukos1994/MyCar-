@@ -1,0 +1,10 @@
+{
+  "name": "MyCar+",
+  "short_name": "MyCar+",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0d47a1",
+  "theme_color": "#0d47a1",
+  "description": "Διαχείριση οχημάτων, ασφάλειας, ΚΤΕΟ, service και εξόδων.",
+  "icons": []
+}

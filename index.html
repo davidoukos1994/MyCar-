@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MyCar+ Web V2</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <div class="logo">🚗 MyCar+</div>
+      <p>Ασφάλεια, ΚΤΕΟ, service και έξοδα σε ένα μέρος.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="dashboard">
+      <div class="dash-card">
+        <span>Οχήματα</span>
+        <strong id="dashVehicles">0</strong>
+      </div>
+      <div class="dash-card warn">
+        <span>Λήγουν σύντομα</span>
+        <strong id="dashSoon">0</strong>
+      </div>
+      <div class="dash-card bad">
+        <span>Ληγμένα</span>
+        <strong id="dashExpired">0</strong>
+      </div>
+      <div class="dash-card money">
+        <span>Σύνολο εξόδων</span>
+        <strong id="dashCosts">€0.00</strong>
+      </div>
+    </section>
+
+    <section class="card profile-card">
+      <div>
+        <h2>Προφίλ</h2>
+        <p>Αποθηκεύεται αυτόματα στον browser.</p>
+      </div>
+      <input id="ownerName" type="text" placeholder="Ονοματεπώνυμο" />
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <h2 id="formTitle">Προσθήκη οχήματος</h2>
+          <p id="formSubtitle">Συμπλήρωσε τα στοιχεία του οχήματος.</p>
+        </div>
+        <button id="cancelEditBtn" class="ghost-btn hidden">Άκυρο</button>
+      </div>
+
+      <div class="photo-box">
+        <div id="photoPreview" class="photo-preview">📷</div>
+        <div>
+          <label>Φωτογραφία οχήματος</label>
+          <input id="vehiclePhoto" type="file" accept="image/*" />
+          <small>Αποθηκεύεται τοπικά στον browser.</small>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div>
+          <label>Τύπος</label>
+          <select id="vehicleType">
+            <option>Αυτοκίνητο</option>
+            <option>Μηχανή</option>
+            <option>Scooter</option>
+            <option>Van</option>
+            <option>Φορτηγό</option>
+            <option>ATV</option>
+            <option>Άλλο</option>
+          </select>
+        </div>
+        <div>
+          <label>Μάρκα</label>
+          <input id="brand" type="text" placeholder="π.χ. Ford" />
+        </div>
+        <div>
+          <label>Μοντέλο</label>
+          <input id="model" type="text" placeholder="π.χ. Focus" />
+        </div>
+        <div>
+          <label>Έτος</label>
+          <input id="year" type="number" placeholder="π.χ. 2003" />
+        </div>
+        <div>
+          <label>Πινακίδα</label>
+          <input id="plate" type="text" placeholder="π.χ. ΙΚΧ-1234" />
+        </div>
+        <div>
+          <label>Λήξη ασφάλειας</label>
+          <input id="insuranceDate" type="date" />
+        </div>
+        <div>
+          <label>Λήξη ΚΤΕΟ</label>
+          <input id="kteoDate" type="date" />
+        </div>
+        <div>
+          <label>Τωρινά χιλιόμετρα</label>
+          <input id="currentKm" type="number" placeholder="π.χ. 185000" />
+        </div>
+        <div>
+          <label>Τελευταίο service στα km</label>
+          <input id="lastServiceKm" type="number" placeholder="π.χ. 180000" />
+        </div>
+        <div>
+          <label>Service κάθε πόσα km</label>
+          <input id="serviceEveryKm" type="number" placeholder="π.χ. 10000" />
+        </div>
+        <div>
+          <label>Καύσιμα (€)</label>
+          <input id="fuelCost" type="number" step="0.01" placeholder="π.χ. 50" />
+        </div>
+        <div>
+          <label>Service / άλλα έξοδα (€)</label>
+          <input id="serviceCost" type="number" step="0.01" placeholder="π.χ. 120" />
+        </div>
+      </div>
+
+      <button id="saveVehicleBtn" class="primary-btn">Προσθήκη οχήματος</button>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <h2>Οχήματα</h2>
+          <p>Αναζήτηση και διαχείριση οχημάτων.</p>
+        </div>
+        <span id="vehicleCount" class="badge">0</span>
+      </div>
+
+      <input id="searchInput" class="search" type="search" placeholder="Αναζήτηση με μάρκα, μοντέλο ή πινακίδα..." />
+      <div id="vehiclesList" class="vehicles-list"></div>
+    </section>
+  </main>
+
+  <footer>MyCar+ Web V2</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
