@@ -1,28 +1,18 @@
-# MyCar+ Web V2
+# MyCar+ Web V3
 
 Web εφαρμογή για GitHub Pages.
 
-## V2 περιλαμβάνει
-- Καλύτερο design
-- Dashboard με σύνοψη
+## Περιλαμβάνει
+- Προφίλ χρήστη
+- Dashboard
+- Προσθήκη / επεξεργασία / διαγραφή οχήματος
 - Αναζήτηση οχημάτων
-- Προσθήκη οχήματος
-- Επεξεργασία οχήματος
-- Διαγραφή οχήματος
 - Φωτογραφία οχήματος
-- Ασφάλεια
-- ΚΤΕΟ
-- Service με χιλιόμετρα
+- Ασφάλεια, ΚΤΕΟ, service
 - Έξοδα καυσίμων / service
-- Αυτόματη αποθήκευση στον browser
+- Έγγραφα ανά όχημα: Άδεια, Ασφάλεια, ΚΤΕΟ, Service, Άλλο
+- Αυτόματη αποθήκευση στον browser με LocalStorage
 
-## Upload στο GitHub Pages
-Ανέβασε όλα τα αρχεία στο repository:
-
-- index.html
-- style.css
-- app.js
-- manifest.json
-- README.md
-
-Μετά άνοιξε το GitHub Pages link.
+## Upload
+Ανέβασε όλα τα αρχεία στο GitHub Pages repository:
+index.html, style.css, app.js, manifest.json, README.md
