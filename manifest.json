@@ -2,9 +2,11 @@
   "name": "MyCar+",
   "short_name": "MyCar+",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#0d47a1",
+  "orientation": "portrait-primary",
+  "background_color": "#f4f7fb",
   "theme_color": "#0d47a1",
-  "description": "Διαχείριση οχημάτων, εγγράφων και εξόδων.",
+  "description": "MyCar+ V5.4 - διαχείριση οχημάτων, εγγράφων, εξόδων και υπενθυμίσεων.",
   "icons": []
 }
