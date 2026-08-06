@@ -2,233 +2,135 @@
 <html lang="el">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MyCar+ Web V5.4</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>MyCar+ Web V6</title>
   <meta name="theme-color" content="#0d47a1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="MyCar+">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="topbar">
-  <div class="brand-block">
-    <div class="brand-icon">🚗</div>
-    <div>
-      <div class="logo">MyCar+</div>
-      <p>Το ψηφιακό σου γκαράζ</p>
-    </div>
-  </div>
+  <div class="brand"><span class="brand-icon">🚗</span><div><b>MyCar+</b><small>Απλή διαχείριση οχημάτων</small></div></div>
   <div class="top-actions">
-    <span id="headerOwner">Ο χρήστης μου</span>
-    <button id="installAppBtn" class="top-button secondary-top hidden" type="button">⬇️ Εγκατάσταση</button>
-    <button id="backupMenuBtn" class="theme-toggle" type="button" title="Backup">💾</button>
-    <button id="themeToggleBtn" class="theme-toggle" type="button">🌙</button>
-    <button id="scrollToAddBtn" class="top-button">+ Νέο όχημα</button>
+    <button id="installBtn" class="icon-btn hidden" title="Εγκατάσταση">⬇️</button>
+    <button id="backupBtn" class="icon-btn" title="Backup">💾</button>
+    <button id="themeBtn" class="icon-btn" title="Θέμα">🌙</button>
   </div>
 </header>
 
-<main class="container">
-  <section class="welcome">
-    <div>
-      <span class="eyebrow">DASHBOARD</span>
-      <h1>Καλώς ήρθες στο MyCar+</h1>
-      <p>Όλες οι σημαντικές πληροφορίες των οχημάτων σου σε μία οθόνη.</p>
-    </div>
+<main class="app-shell">
+  <section class="hero-card">
+    <div><span class="eyebrow">MY GARAGE</span><h1>Τα οχήματά σου, απλά.</h1><p>Πρόσθεσε μόνο όσα στοιχεία θέλεις και συμπλήρωσέ τα αργότερα.</p></div>
+    <button id="newVehicleBtn" class="primary large">＋ Νέο όχημα</button>
   </section>
 
-  <section class="dashboard">
-    <div class="dash dash-blue"><div class="dash-icon">🚘</div><div><span>Συνολικά οχήματα</span><b id="dashVehicles">0</b></div></div>
-    <div class="dash dash-orange"><div class="dash-icon">⏳</div><div><span>Λήγουν σύντομα</span><b id="dashSoon">0</b></div></div>
-    <div class="dash dash-red"><div class="dash-icon">!</div><div><span>Ληγμένα</span><b id="dashExpired">0</b></div></div>
-    <div class="dash dash-green"><div class="dash-icon">€</div><div><span>Σύνολο εξόδων</span><b id="dashCosts">€0.00</b></div></div>
+  <section class="summary-grid">
+    <article><span>Οχήματα</span><b id="sumVehicles">0</b></article>
+    <article><span>Λήγουν σε 7 ημέρες</span><b id="sumSoon">0</b></article>
+    <article><span>Ληγμένα</span><b id="sumExpired">0</b></article>
+    <article><span>Σύνολο εξόδων</span><b id="sumCosts">€0.00</b></article>
   </section>
 
-  <section class="card notifications-panel">
-    <div class="head">
-      <div><h2>🔔 Κέντρο ειδοποιήσεων</h2><p>Ασφάλεια, ΚΤΕΟ και service που χρειάζονται προσοχή.</p></div>
-    </div>
-    <div id="notificationsList">Δεν υπάρχουν ειδοποιήσεις.</div>
+  <section class="card alerts-card">
+    <div class="section-head"><div><h2>🔔 Υπενθυμίσεις</h2><p>Ασφάλεια, ΚΤΕΟ και service.</p></div></div>
+    <div id="alertsList"></div>
   </section>
 
-  <section id="backupPanel" class="card backup-panel hidden">
-  <div class="head">
-    <div>
-      <h2>💾 Backup δεδομένων</h2>
-      <p>Εξαγωγή και επαναφορά όλων των οχημάτων σου.</p>
-    </div>
-    <button id="closeBackupBtn" class="ghost" type="button">Κλείσιμο</button>
-  </div>
-  <div class="backup-actions">
-    <button id="exportDataBtn" class="secondary" type="button">Εξαγωγή backup (.json)</button>
-    <label class="import-label">
-      Εισαγωγή backup
-      <input id="importDataInput" type="file" accept=".json,application/json">
-    </label>
-  </div>
-  <small>Το backup περιλαμβάνει οχήματα, φωτογραφίες, έγγραφα, έξοδα και ιστορικά.</small>
-</section>
-
-<section class="card profile">
-    <div><h2>Προφίλ</h2><p>Αποθηκεύεται αυτόματα.</p></div>
-    <input id="ownerName" placeholder="Ονοματεπώνυμο">
-  </section>
-
-  <section class="card" id="vehicleFormCard">
-    <div class="head">
-      <div><h2 id="formTitle">Προσθήκη οχήματος</h2><p id="formSubtitle">Συμπλήρωσε τα στοιχεία.</p></div>
-      <button id="cancelEditBtn" class="ghost hidden">Άκυρο</button>
+  <section id="vehicleForm" class="card hidden">
+    <div class="section-head">
+      <div><h2 id="formTitle">Νέο όχημα</h2><p>Μόνο ο τύπος οχήματος είναι απαραίτητος.</p></div>
+      <button id="closeFormBtn" class="ghost">Κλείσιμο</button>
     </div>
 
+    <h3>1. Τι όχημα είναι;</h3>
+    <div id="typePicker" class="type-picker">
+      <button data-type="Αυτοκίνητο" class="type-option active"><span>🚗</span><b>Αυτοκίνητο</b></button>
+      <button data-type="Μηχανή" class="type-option"><span>🏍️</span><b>Μηχανή</b></button>
+      <button data-type="Scooter" class="type-option"><span>🛵</span><b>Scooter</b></button>
+      <button data-type="Van" class="type-option"><span>🚐</span><b>Van</b></button>
+      <button data-type="Φορτηγό" class="type-option"><span>🚚</span><b>Φορτηγό</b></button>
+      <button data-type="Άλλο" class="type-option"><span>➕</span><b>Άλλο</b></button>
+    </div>
+
+    <h3>2. Φωτογραφία <small>(προαιρετική)</small></h3>
     <div class="photo-row">
-      <div id="photoPreview" class="photo">📷</div>
-      <div>
-        <label>Φωτογραφία οχήματος</label>
-        <input id="vehiclePhoto" type="file" accept="image/*">
-        <small>Προτίμησε μικρή φωτογραφία.</small>
+      <div id="photoPreview" class="photo-preview">📷</div>
+      <div><input id="vehiclePhoto" type="file" accept="image/*" capture="environment"><small>Τράβηξε φωτογραφία ή επίλεξε από τη συλλογή.</small></div>
+    </div>
+
+    <h3>3. Στοιχεία <small>(όλα προαιρετικά)</small></h3>
+    <div class="form-grid">
+      <label>Όνομα / μάρκα<input id="brand" placeholder="π.χ. Ford"></label>
+      <label>Μοντέλο<input id="model" placeholder="π.χ. Focus"></label>
+      <label>Έτος<input id="year" type="number" placeholder="π.χ. 2003"></label>
+      <label>Πινακίδα<input id="plate" placeholder="π.χ. ΙΚΧ-1234"></label>
+      <label>Τωρινά χιλιόμετρα<input id="currentKm" type="number" placeholder="π.χ. 185000"></label>
+      <label>Σημειώσεις<textarea id="notes" placeholder="Οτιδήποτε θέλεις να θυμάσαι"></textarea></label>
+    </div>
+
+    <details class="optional-block">
+      <summary>Ασφάλεια, ΚΤΕΟ και service</summary>
+      <div class="form-grid details-grid">
+        <label>Λήξη ασφάλειας<input id="insuranceDate" type="date"></label>
+        <label>Λήξη ΚΤΕΟ<input id="kteoDate" type="date"></label>
+        <label>Τελευταίο service στα km<input id="lastServiceKm" type="number"></label>
+        <label>Service κάθε πόσα km<input id="serviceEveryKm" type="number"></label>
       </div>
-    </div>
+    </details>
 
-    <div class="grid">
-      <div><label>Τύπος</label><select id="vehicleType"><option>Αυτοκίνητο</option><option>Μηχανή</option><option>Scooter</option><option>Van</option><option>Φορτηγό</option><option>ATV</option><option>Άλλο</option></select></div>
-      <div><label>Μάρκα</label><input id="brand" placeholder="π.χ. Ford"></div>
-      <div><label>Μοντέλο</label><input id="model" placeholder="π.χ. Focus"></div>
-      <div><label>Έτος</label><input id="year" type="number" placeholder="π.χ. 2003"></div>
-      <div><label>Πινακίδα</label><input id="plate" placeholder="π.χ. ΙΚΧ-1234"></div>
-      <div><label>Λήξη ασφάλειας</label><input id="insuranceDate" type="date"></div>
-      <div><label>Λήξη ΚΤΕΟ</label><input id="kteoDate" type="date"></div>
-      <div><label>Τωρινά km</label><input id="currentKm" type="number"></div>
-      <div><label>Τελευταίο service στα km</label><input id="lastServiceKm" type="number"></div>
-      <div><label>Service κάθε πόσα km</label><input id="serviceEveryKm" type="number"></div>
-      <div><label>Καύσιμα (€)</label><input id="fuelCost" type="number" step="0.01"></div>
-      <div><label>Service / άλλα (€)</label><input id="serviceCost" type="number" step="0.01"></div>
-    </div>
-
-    <div class="docs-box">
-      <h3>Έγγραφα οχήματος</h3>
-      <p>Άδεια, Ασφάλεια, ΚΤΕΟ, Service ή άλλο αρχείο.</p>
-      <div class="grid">
-        <div><label>Κατηγορία</label><select id="documentType"><option>Άδεια</option><option>Ασφάλεια</option><option>ΚΤΕΟ</option><option>Service</option><option>Άλλο</option></select></div>
-        <div><label>Αρχείο</label><input id="documentFile" type="file" accept="image/*,.pdf"></div>
+    <details class="optional-block">
+      <summary>Ιδιοκτήτες (έως 2)</summary>
+      <div class="owners-grid">
+        <div><h4>Ιδιοκτήτης 1</h4><label>Ονοματεπώνυμο<input id="owner1Name"></label><label>Τηλέφωνο<input id="owner1Phone" type="tel"></label></div>
+        <div><h4>Ιδιοκτήτης 2</h4><label>Ονοματεπώνυμο<input id="owner2Name"></label><label>Τηλέφωνο<input id="owner2Phone" type="tel"></label></div>
       </div>
-      <button id="addDocumentBtn" class="secondary" type="button">Προσθήκη εγγράφου</button>
-      <div id="documentsPreview" class="docs-list"></div>
-      <small>Τα αρχεία αποθηκεύονται τοπικά στον browser.</small>
-    </div>
+    </details>
 
-    <button id="saveVehicleBtn" class="primary">Προσθήκη οχήματος</button>
+    <details class="optional-block">
+      <summary>Κατανάλωση / έξοδα</summary>
+      <div class="form-grid details-grid">
+        <label>Συνολικά καύσιμα (€)<input id="fuelCost" type="number" step="0.01"></label>
+        <label>Service / άλλα έξοδα (€)<input id="serviceCost" type="number" step="0.01"></label>
+      </div>
+    </details>
+
+    <details class="optional-block">
+      <summary>Έγγραφα (προαιρετικά)</summary>
+      <div class="document-add-row">
+        <select id="documentType"><option>Άδεια</option><option>Ασφάλεια</option><option>ΚΤΕΟ</option><option>Service</option><option>Άλλο</option></select>
+        <input id="documentFile" type="file" accept="image/*,.pdf">
+        <button id="addDocumentBtn" class="secondary" type="button">Προσθήκη</button>
+      </div>
+      <div id="formDocuments"></div>
+    </details>
+
+    <div class="form-actions"><button id="saveVehicleBtn" class="primary large">Αποθήκευση οχήματος</button><button id="cancelEditBtn" class="ghost hidden">Ακύρωση επεξεργασίας</button></div>
   </section>
 
-  
-<section class="card">
-<div class="head"><div><h2>📈 Στατιστικά</h2><p>Σύνοψη εξόδων.</p></div></div>
-<div class="dashboard">
-<div class="dash dash-green"><div><span>Καύσιμα</span><b id="statFuel">€0.00</b></div></div>
-<div class="dash dash-blue"><div><span>Service</span><b id="statService">€0.00</b></div></div>
-<div class="dash dash-orange"><div><span>Μέσο κόστος/όχημα</span><b id="statAvg">€0.00</b></div></div>
-</div>
-<canvas id="expenseChart" height="120"></canvas>
-</section>
+  <section class="card">
+    <div class="section-head"><div><h2>Τα οχήματά μου</h2><p>Πάτησε σε ένα όχημα για να δεις όλες τις πληροφορίες.</p></div><span id="vehicleCount" class="badge">0</span></div>
+    <div class="toolbar"><input id="searchInput" type="search" placeholder="Αναζήτηση"><select id="typeFilter"><option value="all">Όλα τα οχήματα</option><option>Αυτοκίνητο</option><option>Μηχανή</option><option>Scooter</option><option>Van</option><option>Φορτηγό</option><option>Άλλο</option></select></div>
+    <div id="vehiclesList" class="vehicle-grid"></div>
+  </section>
 
-<section class="card">
-  <div class="head">
-    <div>
-      <h2>📁 Κέντρο εγγράφων</h2>
-      <p>Όλα τα έγγραφα των οχημάτων σου σε ένα σημείο.</p>
-    </div>
-    <span id="documentsCount" class="badge">0</span>
-  </div>
-  <div class="document-toolbar">
-    <select id="documentFilter">
-      <option value="all">Όλες οι κατηγορίες</option>
-      <option value="Άδεια">Άδεια</option>
-      <option value="Ασφάλεια">Ασφάλεια</option>
-      <option value="ΚΤΕΟ">ΚΤΕΟ</option>
-      <option value="Service">Service</option>
-      <option value="Άλλο">Άλλο</option>
-    </select>
-    <input id="documentSearch" type="search" placeholder="Αναζήτηση αρχείου ή οχήματος">
-  </div>
-  <div id="allDocumentsList" class="document-library"></div>
-</section>
-
-<section class="card">
-  <div class="head">
-    <div>
-      <h2>📊 Στατιστικά ανά όχημα</h2>
-      <p>Σύγκριση εξόδων καυσίμων και service.</p>
-    </div>
-  </div>
-  <div id="vehicleStatsList" class="vehicle-stats-list"></div>
-</section>
-
-<section class="card">
-    <div class="head">
-      <div><h2>Τα οχήματά μου</h2><p>Δες, αναζήτησε και διαχειρίσου κάθε όχημα.</p></div>
-      <span id="vehicleCount" class="badge">0</span>
-    </div>
-    <input id="searchInput" class="search" type="search" placeholder="Αναζήτηση με μάρκα, μοντέλο ή πινακίδα">
-    <div id="vehiclesList" class="vehicles"></div>
+  <section id="backupPanel" class="card hidden">
+    <div class="section-head"><div><h2>💾 Backup</h2><p>Αποθήκευση ή επαναφορά όλων των δεδομένων.</p></div><button id="closeBackupBtn" class="ghost">Κλείσιμο</button></div>
+    <div class="backup-grid"><button id="exportBackupBtn" class="secondary">Εξαγωγή backup</button><label class="import-label">Εισαγωγή backup<input id="importBackupInput" type="file" accept="application/json,.json"></label></div>
   </section>
 </main>
 
-
-<div id="vehicleModal" class="modal hidden" aria-hidden="true">
-  <div class="modal-backdrop" onclick="closeVehicleModal()"></div>
-  <div class="modal-card">
-    <button class="modal-close" onclick="closeVehicleModal()">×</button>
-    <div id="vehicleModalContent"></div>
-    <section id="historyManager" class="history-manager hidden">
-      <div class="history-tabs">
-        <button id="fuelTabBtn" class="history-tab active" type="button">⛽ Καύσιμα</button>
-        <button id="serviceTabBtn" class="history-tab" type="button">🔧 Service</button>
-      </div>
-
-      <div id="fuelPanel" class="history-panel">
-        <h3>Νέα καταχώρηση καυσίμου</h3>
-        <div class="history-form-grid">
-          <div><label>Ημερομηνία</label><input id="fuelHistoryDate" type="date"></div>
-          <div><label>Λίτρα</label><input id="fuelHistoryLiters" type="number" step="0.01" placeholder="π.χ. 35"></div>
-          <div><label>Κόστος (€)</label><input id="fuelHistoryCost" type="number" step="0.01" placeholder="π.χ. 62.50"></div>
-          <div><label>Χιλιόμετρα</label><input id="fuelHistoryKm" type="number" placeholder="π.χ. 185500"></div>
-        </div>
-        <button id="addFuelHistoryBtn" class="secondary modal-action" type="button">Προσθήκη καυσίμου</button>
-        <div id="fuelHistoryList" class="history-list"></div>
-      </div>
-
-      <div id="servicePanel" class="history-panel hidden">
-        <h3>Νέα καταχώρηση service</h3>
-        <div class="history-form-grid">
-          <div><label>Ημερομηνία</label><input id="serviceHistoryDate" type="date"></div>
-          <div><label>Συνεργείο</label><input id="serviceHistoryGarage" placeholder="π.χ. Auto Service"></div>
-          <div><label>Εργασία</label><input id="serviceHistoryWork" placeholder="π.χ. Λάδια και φίλτρα"></div>
-          <div><label>Κόστος (€)</label><input id="serviceHistoryCost" type="number" step="0.01" placeholder="π.χ. 120"></div>
-          <div><label>Χιλιόμετρα</label><input id="serviceHistoryKm" type="number" placeholder="π.χ. 180000"></div>
-        </div>
-        <button id="addServiceHistoryBtn" class="secondary modal-action" type="button">Προσθήκη service</button>
-        <div id="serviceHistoryList" class="history-list"></div>
-      </div>
-    </section>
-  </div>
+<div id="vehicleModal" class="modal hidden">
+  <div class="modal-backdrop" data-close-modal></div>
+  <article class="modal-card"><button class="modal-close" data-close-modal>×</button><div id="vehicleModalContent"></div></article>
 </div>
 
-
-<div id="documentModal" class="modal hidden" aria-hidden="true">
-  <div class="modal-backdrop" onclick="closeDocumentModal()"></div>
-  <div class="modal-card document-modal-card">
-    <button class="modal-close" onclick="closeDocumentModal()">×</button>
-    <div id="documentModalContent"></div>
-  </div>
-</div>
-
-<div id="connectionStatus" class="connection-status hidden"></div>
-<footer>MyCar+ Web V5.4</footer>
+<div id="pdfPrintArea" class="print-only"></div>
+<div id="toast" class="toast hidden"></div>
+<footer>MyCar+ Web V6</footer>
 <script src="app.js"></script>
-<script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js"));
-  }
-</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js'))}</script>
 </body>
 </html>
