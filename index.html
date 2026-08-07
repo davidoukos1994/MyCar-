@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>MyCar+ Web V6</title>
+  <title>MyCar+ Web V6.1</title>
   <meta name="theme-color" content="#0d47a1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -58,7 +58,7 @@
     <h3>2. Φωτογραφία <small>(προαιρετική)</small></h3>
     <div class="photo-row">
       <div id="photoPreview" class="photo-preview">📷</div>
-      <div><input id="vehiclePhoto" type="file" accept="image/*" capture="environment"><small>Τράβηξε φωτογραφία ή επίλεξε από τη συλλογή.</small></div>
+      <div><input id="vehiclePhoto" type="file" accept="image/*"><small>Στο iPhone μπορείς να επιλέξεις Βιβλιοθήκη φωτογραφιών ή Κάμερα.</small></div>
     </div>
 
     <h3>3. Στοιχεία <small>(όλα προαιρετικά)</small></h3>
@@ -70,6 +70,25 @@
       <label>Τωρινά χιλιόμετρα<input id="currentKm" type="number" placeholder="π.χ. 185000"></label>
       <label>Σημειώσεις<textarea id="notes" placeholder="Οτιδήποτε θέλεις να θυμάσαι"></textarea></label>
     </div>
+
+
+    <details class="optional-block">
+      <summary>Χαρακτηριστικά οχήματος (προαιρετικά)</summary>
+      <div class="spec-actions">
+        <button id="searchSpecsBtn" class="secondary" type="button">🔎 Αναζήτηση χαρακτηριστικών στο διαδίκτυο</button>
+        <small>Χρησιμοποιεί μάρκα, μοντέλο και έτος για να ανοίξει σχετική αναζήτηση.</small>
+      </div>
+      <div class="form-grid details-grid">
+        <label>Κυβισμός (cc)<input id="engineCc" type="number" placeholder="π.χ. 1596"></label>
+        <label>Ιπποδύναμη (hp)<input id="horsepower" type="number" placeholder="π.χ. 100"></label>
+        <label>Καύσιμο<input id="fuelType" placeholder="π.χ. Βενζίνη"></label>
+        <label>Κιβώτιο<input id="transmission" placeholder="π.χ. Χειροκίνητο"></label>
+        <label>Κίνηση<input id="drivetrain" placeholder="π.χ. Εμπρός"></label>
+        <label>Κατανάλωση εργοστασίου (L/100km)<input id="officialConsumption" type="number" step="0.1" placeholder="π.χ. 7.2"></label>
+        <label>Αμάξωμα<input id="bodyType" placeholder="π.χ. Hatchback"></label>
+        <label>Θέσεις<input id="seats" type="number" placeholder="π.χ. 5"></label>
+      </div>
+    </details>
 
     <details class="optional-block">
       <summary>Ασφάλεια, ΚΤΕΟ και service</summary>
@@ -129,7 +148,7 @@
 
 <div id="pdfPrintArea" class="print-only"></div>
 <div id="toast" class="toast hidden"></div>
-<footer>MyCar+ Web V6</footer>
+<footer>MyCar+ Web V6.1</footer>
 <script src="app.js"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js'))}</script>
 </body>

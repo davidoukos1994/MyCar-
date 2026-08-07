@@ -12,3 +12,19 @@ html.dark{--bg:#0e1726;--card:#162234;--txt:#edf3fb;--mut:#aab6c5;--bor:#2b3a4e;
 @media(max-width:850px){.type-picker{grid-template-columns:repeat(3,1fr)}.summary-grid{grid-template-columns:repeat(2,1fr)}.vehicle-grid{grid-template-columns:1fr}}
 @media(max-width:650px){.hero-card{align-items:flex-start;flex-direction:column}.form-grid,.owners-grid,.photo-row,.toolbar,.modal-head,.detail-grid,.backup-grid{grid-template-columns:1fr}.document-add-row{grid-template-columns:1fr}.vehicle-card{grid-template-columns:82px 1fr}.vehicle-photo{height:82px}.type-picker{grid-template-columns:repeat(2,1fr)}.form-actions{flex-direction:column}.topbar{padding-top:calc(10px + env(safe-area-inset-top))}}
 @media print{body>*{display:none!important}#pdfPrintArea{display:block!important;color:#000;background:#fff;padding:20px}#pdfPrintArea h1{color:#0d47a1}.pdf-section{margin:16px 0}.pdf-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pdf-field{border:1px solid #ccc;padding:8px;border-radius:7px}.pdf-field small{display:block;color:#555}.pdf-photo{max-width:280px;max-height:180px;object-fit:cover}}
+
+.spec-actions{
+  display:grid;
+  grid-template-columns:minmax(220px,auto) 1fr;
+  gap:12px;
+  align-items:center;
+  margin:12px 0 16px
+}
+.spec-actions .secondary{
+  width:auto;
+  margin-top:0
+}
+@media(max-width:680px){
+  .spec-actions{grid-template-columns:1fr}
+  .spec-actions .secondary{width:100%}
+}
