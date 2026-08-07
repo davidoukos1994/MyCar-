@@ -1,3 +1,20 @@
+
+async function resizeImageFile(file,maxSize=800,quality=0.82){
+ return new Promise((resolve,reject)=>{
+  const img=new Image();
+  const fr=new FileReader();
+  fr.onload=e=>{img.onload=()=>{
+    let w=img.width,h=img.height;
+    const scale=Math.min(1,maxSize/Math.max(w,h));
+    w=Math.round(w*scale);h=Math.round(h*scale);
+    const c=document.createElement('canvas');c.width=w;c.height=h;
+    c.getContext('2d').drawImage(img,0,0,w,h);
+    resolve(c.toDataURL('image/jpeg',quality));
+  }; img.src=e.target.result;};
+  fr.onerror=reject; fr.readAsDataURL(file);
+ });
+}
+
 const KEY='mycarplus_v6',THEME_KEY='mycarplus_theme';
 const $=id=>document.getElementById(id);
 let state={vehicles:[]},editingId=null,selectedType='Αυτοκίνητο',photoData='',formDocs=[],deferredPrompt=null;
@@ -68,3 +85,61 @@ function searchVehicleSpecs(){
 }
 
 $('searchSpecsBtn').onclick=searchVehicleSpecs;
+
+
+$('vehiclePhoto').addEventListener('change', async (e)=>{
+  const file=e.target.files?.[0];
+  if(!file)return;
+
+  try{
+    photoData=await prepareVehiclePhoto(file);
+    $('photoPreview').innerHTML=`<img src="${photoData}" alt="Φωτογραφία οχήματος">`;
+  }catch(err){
+    console.error(err);
+    alert('Δεν μπόρεσα να επεξεργαστώ τη φωτογραφία. Δοκίμασε άλλη εικόνα.');
+    e.target.value='';
+  }
+});
+
+
+async function prepareVehiclePhoto(file){
+  const dataUrl=await readFileAsDataURL(file);
+  const img=await loadImage(dataUrl);
+
+  const size=Math.min(img.naturalWidth||img.width, img.naturalHeight||img.height);
+  const sx=Math.max(0, ((img.naturalWidth||img.width)-size)/2);
+  const sy=Math.max(0, ((img.naturalHeight||img.height)-size)/2);
+
+  const canvas=document.createElement('canvas');
+  const target=600;
+  canvas.width=target;
+  canvas.height=target;
+
+  const ctx=canvas.getContext('2d', {alpha:false});
+  ctx.fillStyle='#ffffff';
+  ctx.fillRect(0,0,target,target);
+  ctx.imageSmoothingEnabled=true;
+  ctx.imageSmoothingQuality='high';
+  ctx.drawImage(img,sx,sy,size,size,0,0,target,target);
+
+  // JPEG keeps storage small and works everywhere.
+  return canvas.toDataURL('image/jpeg',0.82);
+}
+
+function readFileAsDataURL(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function loadImage(src){
+  return new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>resolve(img);
+    img.onerror=reject;
+    img.src=src;
+  });
+}
