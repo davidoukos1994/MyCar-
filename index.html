@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>MyCar+ Web V6.1</title>
+  <title>MyCar+ Web V6.5</title>
   <meta name="theme-color" content="#0d47a1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -22,10 +22,12 @@
 </header>
 
 <main class="app-shell">
-  <section class="hero-card">
-    <div><span class="eyebrow">MY GARAGE</span><h1>Τα οχήματά σου, απλά.</h1><p>Πρόσθεσε μόνο όσα στοιχεία θέλεις και συμπλήρωσέ τα αργότερα.</p></div>
-    <button id="newVehicleBtn" class="primary large">＋ Νέο όχημα</button>
+  <section class="card garage-first">
+    <div class="section-head"><div><h2>Τα οχήματά μου</h2><p>Πάτησε σε ένα όχημα για να δεις όλες τις πληροφορίες.</p></div><span id="vehicleCount" class="badge">0</span></div>
+    <div class="garage-new-row"><button id="garageNewVehicleBtn" class="primary large garage-new">＋ Νέο όχημα</button></div><div class="toolbar"><input id="searchInput" type="search" placeholder="Αναζήτηση"><select id="typeFilter"><option value="all">Όλα τα οχήματα</option><option>Αυτοκίνητο</option><option>Μηχανή</option><option>Scooter</option><option>Van</option><option>Φορτηγό</option><option>Άλλο</option></select></div>
+    <div id="vehiclesList" class="vehicle-grid"></div>
   </section>
+
 
   <section class="summary-grid">
     <article><span>Οχήματα</span><b id="sumVehicles">0</b></article>
@@ -129,12 +131,6 @@
     <div class="form-actions"><button id="saveVehicleBtn" class="primary large">Αποθήκευση οχήματος</button><button id="cancelEditBtn" class="ghost hidden">Ακύρωση επεξεργασίας</button></div>
   </section>
 
-  <section class="card">
-    <div class="section-head"><div><h2>Τα οχήματά μου</h2><p>Πάτησε σε ένα όχημα για να δεις όλες τις πληροφορίες.</p></div><span id="vehicleCount" class="badge">0</span></div>
-    <div class="toolbar"><input id="searchInput" type="search" placeholder="Αναζήτηση"><select id="typeFilter"><option value="all">Όλα τα οχήματα</option><option>Αυτοκίνητο</option><option>Μηχανή</option><option>Scooter</option><option>Van</option><option>Φορτηγό</option><option>Άλλο</option></select></div>
-    <div id="vehiclesList" class="vehicle-grid"></div>
-  </section>
-
   <section id="backupPanel" class="card hidden">
     <div class="section-head"><div><h2>💾 Backup</h2><p>Αποθήκευση ή επαναφορά όλων των δεδομένων.</p></div><button id="closeBackupBtn" class="ghost">Κλείσιμο</button></div>
     <div class="backup-grid"><button id="exportBackupBtn" class="secondary">Εξαγωγή backup</button><label class="import-label">Εισαγωγή backup<input id="importBackupInput" type="file" accept="application/json,.json"></label></div>
@@ -148,7 +144,7 @@
 
 <div id="pdfPrintArea" class="print-only"></div>
 <div id="toast" class="toast hidden"></div>
-<footer>MyCar+ Web V6.1</footer>
+<footer>MyCar+ Web V6.5</footer>
 <script src="app.js"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js'))}</script>
 </body>
