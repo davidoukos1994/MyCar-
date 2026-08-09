@@ -98,3 +98,18 @@ html.dark{--bg:#0e1726;--card:#162234;--txt:#edf3fb;--mut:#aab6c5;--bor:#2b3a4e;
 .open-arrow{font-size:34px;line-height:1;color:var(--p);font-weight:500}
 .vehicle-photo-open{box-shadow:inset 0 0 0 1px rgba(13,71,161,.05)}
 @media(max-width:650px){.app-shell{padding-top:14px}.garage-first{padding:16px}.garage-first .toolbar{margin-top:12px}.vehicle-actions{margin-top:10px}.vehicle-actions button{padding:8px 9px}}
+
+.saved-vehicles-top{margin-top:0;padding-top:0}
+.saved-vehicles-top>.card{margin-top:0}
+.quick-add-section{margin:-6px 0 18px}
+.quick-add-btn{
+  width:100%;border:0;border-radius:18px;padding:16px 20px;
+  background:linear-gradient(135deg,#0d47a1,#1565c0);color:#fff;
+  font-size:17px;font-weight:900;cursor:pointer;
+  box-shadow:0 10px 24px rgba(13,71,161,.18)
+}
+.quick-add-btn:active{transform:scale(.99)}
+@media(max-width:680px){
+  main.container{padding-top:14px}
+  .saved-vehicles-top>.card{border-radius:22px}
+}

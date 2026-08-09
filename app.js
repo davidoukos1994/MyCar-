@@ -143,3 +143,11 @@ function loadImage(src){
     img.src=src;
   });
 }
+
+const quickAddVehicleBtn=document.getElementById('quickAddVehicleBtn');
+if(quickAddVehicleBtn){
+  quickAddVehicleBtn.addEventListener('click',()=>{
+    const form=document.getElementById('vehicleFormCard') || document.querySelector('form');
+    if(form) form.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
