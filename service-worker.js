@@ -1,4 +1,23 @@
-const CACHE='mycarplus-v6-3';const FILES=['./','./index.html','./style.css','./app.js','./manifest.json'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)));self.skipWaiting()});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))));self.clients.claim()});
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(caches.match(e.request).then(c=>c||fetch(e.request).then(r=>{const x=r.clone();caches.open(CACHE).then(k=>k.put(e.request,x));return r}).catch(()=>caches.match('./index.html'))))});
+const CACHE_NAME = "mycarplus-v6-7";
+const CORE = ["./", "./index.html", "./style.css?v=6.7", "./app.js?v=6.7", "./manifest.json"];
+self.addEventListener("install", event => {
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CORE)).catch(()=>{}));
+  self.skipWaiting();
+});
+self.addEventListener("activate", event => {
+  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))));
+  self.clients.claim();
+});
+self.addEventListener("fetch", event => {
+  if(event.request.method !== "GET") return;
+  const req = event.request;
+  if(req.mode === "navigate"){
+    event.respondWith(fetch(req).then(res => {
+      const copy=res.clone(); caches.open(CACHE_NAME).then(c=>c.put("./index.html",copy)); return res;
+    }).catch(()=>caches.match("./index.html")));
+    return;
+  }
+  event.respondWith(fetch(req).then(res => {
+    const copy=res.clone(); caches.open(CACHE_NAME).then(c=>c.put(req,copy)); return res;
+  }).catch(()=>caches.match(req)));
+});

@@ -113,3 +113,27 @@ html.dark{--bg:#0e1726;--card:#162234;--txt:#edf3fb;--mut:#aab6c5;--bor:#2b3a4e;
   main.container{padding-top:14px}
   .saved-vehicles-top>.card{border-radius:22px}
 }
+
+/* V6.7 - saved vehicles always appear first */
+main.app-shell{padding-top:14px}
+.garage-first{margin-top:0!important}
+.garage-first .section-head{margin-bottom:14px}
+.garage-first .vehicle-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:14px}
+.garage-first .vehicle-card{margin:0;border-radius:18px;cursor:pointer}
+.garage-first .vehicle-photo{width:112px;height:112px;min-width:112px;border-radius:16px;overflow:hidden}
+.garage-first .vehicle-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
+.garage-first .garage-new-row{margin:4px 0 0}
+.garage-first .garage-new{width:100%;border-radius:16px}
+.garage-toolbar-secondary{margin-top:12px}
+@media(max-width:680px){
+  main.app-shell{padding-top:12px}
+  .garage-first{padding:14px!important}
+  .garage-first .section-head p{font-size:13px}
+  .garage-first .vehicle-card{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:12px}
+  .garage-first .vehicle-photo{width:96px;height:96px;min-width:96px}
+  .garage-first .vehicle-card-body{min-width:0}
+  .garage-first .vehicle-actions{display:none}
+  .garage-first .chips{gap:5px}
+  .garage-first .chip{font-size:11px;padding:5px 8px}
+  .garage-toolbar-secondary{display:none}
+}

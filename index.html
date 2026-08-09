@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>MyCar+ Web V6.6</title>
+  <title>MyCar+ Web V6.7</title>
   <meta name="theme-color" content="#0d47a1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="MyCar+">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=6.7">
 </head>
 <body>
 <header class="topbar">
@@ -22,16 +22,15 @@
 </header>
 
 <main class="app-shell">
-<div class="saved-vehicles-top">
-<section class="card garage-first">
-    <div class="section-head"><div><h2>Τα οχήματά μου</h2><p>Πάτησε σε ένα όχημα για να δεις όλες τις πληροφορίες.</p></div><span id="vehicleCount" class="badge">0</span></div>
-    <div class="garage-new-row"><button id="garageNewVehicleBtn" class="primary large garage-new">＋ Νέο όχημα</button></div><div class="toolbar"><input id="searchInput" type="search" placeholder="Αναζήτηση"><select id="typeFilter"><option value="all">Όλα τα οχήματα</option><option>Αυτοκίνητο</option><option>Μηχανή</option><option>Scooter</option><option>Van</option><option>Φορτηγό</option><option>Άλλο</option></select></div>
+<section class="card garage-first saved-vehicles-primary">
+    <div class="section-head">
+      <div><h2>🚙 Τα οχήματά μου</h2><p>Πάτησε σε ένα όχημα για να ανοίξεις την καρτέλα του.</p></div>
+      <span id="vehicleCount" class="badge">0</span>
+    </div>
     <div id="vehiclesList" class="vehicle-grid"></div>
+    <div class="garage-new-row"><button id="garageNewVehicleBtn" class="primary large garage-new">＋ Νέο όχημα</button></div>
+    <div class="toolbar garage-toolbar-secondary"><input id="searchInput" type="search" placeholder="Αναζήτηση"><select id="typeFilter"><option value="all">Όλα τα οχήματα</option><option>Αυτοκίνητο</option><option>Μηχανή</option><option>Scooter</option><option>Van</option><option>Φορτηγό</option><option>Άλλο</option></select></div>
   </section>
-
-<section class="quick-add-section">
-  <button id="quickAddVehicleBtn" class="quick-add-btn" type="button">+ Νέο όχημα</button>
-</section>
 </div>
 
   
@@ -153,8 +152,8 @@
 
 <div id="pdfPrintArea" class="print-only"></div>
 <div id="toast" class="toast hidden"></div>
-<footer>MyCar+ Web V6.6</footer>
-<script src="app.js"></script>
-<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js'))}</script>
+<footer>MyCar+ Web V6.7</footer>
+<script src="app.js?v=6.7"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js?v=6.7'))}</script>
 </body>
 </html>

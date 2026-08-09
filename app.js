@@ -151,3 +151,5 @@ if(quickAddVehicleBtn){
     if(form) form.scrollIntoView({behavior:'smooth',block:'start'});
   });
 }
+
+// MyCar+ Web V6.7: saved vehicles first, card tap opens vehicle detail.
